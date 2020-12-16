@@ -1,0 +1,45 @@
+package cs149;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.*;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
+public class BigBag {
+	
+	public static void main (String[] args) throws IOException  {
+		for (String s : args) {
+			System.out.println(s);
+		}
+		if (args.length < 2) { 
+			System.out.println("Improper usage");
+			System.exit(1);
+		}
+		
+	    
+		try (RandomAccessFile reader = new RandomAccessFile("src/test.dat", "r")) {
+			System.out.println("wow i made it here :)");
+			FileChannel channel = reader.getChannel();
+			MappedByteBuffer buff = channel.map(FileChannel.MapMode.READ_ONLY, 6, 5);
+	        if(buff.hasRemaining()) {
+	        	byte[] data = new byte[12];
+	        	buff.get(data);
+	        	System.out.println(data);
+	        }
+//	        ByteArrayOutputStream out = new ByteArrayOutputStream() {
+//	 
+//	        	
+//	 
+//		        if(buff.hasRemaining()) {
+//		          byte[] data = new byte[buff.remaining()];
+//		          buff.get(data);
+//		          System.out.println(data);
+//		        }
+//	        }
+//		
+		}
+	}
+}

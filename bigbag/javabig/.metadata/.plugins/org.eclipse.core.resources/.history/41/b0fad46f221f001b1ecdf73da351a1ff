@@ -1,0 +1,15 @@
+package cs149;
+
+public class BigBag {
+	public static void main (String[] args) {
+		for (String s : args) {
+			System.out.println(s);
+		}
+		if (args.length < 2) { 
+			System.out.println("Improper usage");
+			exit(1);
+		}
+		
+		
+	}
+}
